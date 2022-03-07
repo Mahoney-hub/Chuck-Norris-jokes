@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, IconButton, Paper} from '@mui/material';
 import {useAppDispatch, useAppSelector} from '../hooks/redux';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -7,17 +7,34 @@ import {fetchUsers} from '../redux/reducers/ActionCreators';
 import {NavLink} from 'react-router-dom';
 
 export const MainPage = () => {
-    const {value, error} = useAppSelector(state => state.userReducer)
+    const [addedValues, setAddedValues] = useState<string[]>([])
+    const {value, error, favoriteJokes} = useAppSelector(state => state.userReducer)
     const dispatch = useAppDispatch()
     const {addToFavorites} = userSlice.actions
+    const {deleteLastJokes} = userSlice.actions
 
     useEffect(() => {
         // dispatch(fetchUsers())
     }, [dispatch])
 
     // Functions
+    // const clickHandler = () => {
+    //     if (!addedValues.includes(value)) {
+    //         dispatch(addToFavorites(value))
+    //         setAddedValues([value,...addedValues])
+    //         console.log(addedValues)
+    //     } else {
+    //         dispatch(deleteLastJokes())
+    //     }
+    // }
     const clickHandler = () => {
-        dispatch(addToFavorites(value))
+        const condition = favoriteJokes.filter(item=>item.title === value).length === 0
+        // condition ?
+        // if () {
+        //     dispatch(addToFavorites(value))
+        // } else {
+        //     dispatch(deleteLastJokes())
+        // }
     }
 
     return (
@@ -34,7 +51,7 @@ export const MainPage = () => {
                 <IconButton size={'large'}
                             color={'error'}
                             onClick={clickHandler}
-                            style={{position:'absolute', top: 0, right: 0, padding: '20px'}}
+                            style={{position: 'absolute', top: 0, right: 0, padding: '20px'}}
                 >
                     <FavoriteIcon/>
                 </IconButton>

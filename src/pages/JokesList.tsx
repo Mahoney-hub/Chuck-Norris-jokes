@@ -14,7 +14,7 @@ export const JokesList = () => {
             </NavLink>
             <Paper variant={'outlined'} style={{width: '100%', minHeight: '350px'}}>
                 <div className={'content-start flex-column'}>
-                    {favoriteJokes.map((item, index) => <Paper key={index} className={'content-between p10 m10'}>
+                    {favoriteJokes.map((item, index) => <Paper key={index} className={'between-center p10 m10'}>
                         <h3 style={{marginRight: '10px'}}>{index + 1}.</h3>
                         {item.title}
                         <IconButton size={'large'}>

@@ -33,7 +33,10 @@ export const userSlice = createSlice({
     reducers: {
         addToFavorites(state, action: PayloadAction<string>) {
             state.favoriteJokes.push({id: v1(), title: action.payload})
-        }
+        },
+        deleteLastJokes(state) {
+            state.favoriteJokes.pop()
+        },
     },
     extraReducers: {
         [fetchUsers.fulfilled.type]: (state, action: PayloadAction<UserState>) => {
