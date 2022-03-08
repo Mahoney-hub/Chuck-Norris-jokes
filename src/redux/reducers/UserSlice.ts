@@ -32,10 +32,17 @@ export const userSlice = createSlice({
     // Поле аналогичное конструкции switch case в обычном reducer
     reducers: {
         addToFavorites(state, action: PayloadAction<string>) {
+            if (state.favoriteJokes.length >= 10) state.favoriteJokes.shift()
             state.favoriteJokes.push({id: v1(), title: action.payload})
         },
-        deleteLastJokes(state) {
-            state.favoriteJokes.pop()
+        deleteJokes(state, action: PayloadAction<string>) {
+            state.favoriteJokes = state.favoriteJokes.filter(item => item.title !== action.payload)
+        },
+        deleteJokesID(state, action: PayloadAction<string>) {
+            state.favoriteJokes = state.favoriteJokes.filter(item => item.id !== action.payload)
+        },
+        deleteAllJokes(state) {
+            state.favoriteJokes = []
         },
     },
     extraReducers: {

@@ -64,27 +64,23 @@
   padding: 20px;
 }
 
+.m5 {
+  margin: 5px;
+}
+
+.p5 {
+  padding: 5px;
+}
+
+.pl10 {
+  padding-left: 10px;
+}
+
 .w100 {
   width: 100%;
 }
 
-.loader {
-  width: 100px;
-  height: 100px;
-  margin: 50px auto;
-  border-radius: 50%;
-  border: 3px dashed darkblue;
-  animation: rotate 1s infinite linear;
-}
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 
 

@@ -7,34 +7,20 @@ import {fetchUsers} from '../redux/reducers/ActionCreators';
 import {NavLink} from 'react-router-dom';
 
 export const MainPage = () => {
-    const [addedValues, setAddedValues] = useState<string[]>([])
     const {value, error, favoriteJokes} = useAppSelector(state => state.userReducer)
     const dispatch = useAppDispatch()
     const {addToFavorites} = userSlice.actions
-    const {deleteLastJokes} = userSlice.actions
+    const {deleteJokes} = userSlice.actions
+    const condition = favoriteJokes.filter(item=>item.title === value).length === 0
 
     useEffect(() => {
         // dispatch(fetchUsers())
     }, [dispatch])
 
-    // Functions
-    // const clickHandler = () => {
-    //     if (!addedValues.includes(value)) {
-    //         dispatch(addToFavorites(value))
-    //         setAddedValues([value,...addedValues])
-    //         console.log(addedValues)
-    //     } else {
-    //         dispatch(deleteLastJokes())
-    //     }
-    // }
     const clickHandler = () => {
-        const condition = favoriteJokes.filter(item=>item.title === value).length === 0
-        // condition ?
-        // if () {
-        //     dispatch(addToFavorites(value))
-        // } else {
-        //     dispatch(deleteLastJokes())
-        // }
+        if (value.length) {
+            condition ? dispatch(addToFavorites(value)) : dispatch(deleteJokes(value))
+        }
     }
 
     return (
@@ -49,7 +35,7 @@ export const MainPage = () => {
                 {error && <h1>{error}</h1>}
                 <h1>{value}</h1>
                 <IconButton size={'large'}
-                            color={'error'}
+                            color={condition ? 'primary' : 'error'}
                             onClick={clickHandler}
                             style={{position: 'absolute', top: 0, right: 0, padding: '20px'}}
                 >
